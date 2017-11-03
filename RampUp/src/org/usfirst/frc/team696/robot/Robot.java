@@ -27,6 +27,10 @@ public class Robot extends IterativeRobot {
 	Joystick joy = new Joystick(0);
 	VictorSP midRight = new VictorSP(8);
 	VictorSP midLeft = new VictorSP(3);
+	VictorSP frontLeft = new VictorSP(9);
+	VictorSP rearLeft = new VictorSP(10);
+	VictorSP frontRight = new VictorSP(2);
+	VictorSP rearRight = new VictorSP(4);
 	
 	double commandedJoy;
 	double motorPercentage;
@@ -116,7 +120,11 @@ public class Robot extends IterativeRobot {
 		}
 		
 		midRight.set(motorPercentage);
-		midLeft.set(motorPercentage);
+		midLeft.set(-motorPercentage);
+		frontRight.set(-motorPercentage);
+		frontLeft.set(motorPercentage);
+		rearRight.set(-motorPercentage);
+		rearLeft.set(motorPercentage);
 		
 		
 		System.out.println("Motor Percentage: " + motorPercentage + "        CommandedJoy: "  + commandedJoy);
