@@ -9,10 +9,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team696.robot.commands.ExampleCommand;
+import org.usfirst.frc.team696.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team696.robot.subsystems.ExampleSubsystem;
 
 /**
- * The VM is configured to automatically run this class, and to call the
+ * 
+ * nfigured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
@@ -20,7 +22,8 @@ import org.usfirst.frc.team696.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem(RobotMap.sideswipe);
+	public static DriveTrain conveyerBelt = new DriveTrain(RobotMap.conveyermotor);
 	public static OI oi;
 
 	Command autonomousCommand;
