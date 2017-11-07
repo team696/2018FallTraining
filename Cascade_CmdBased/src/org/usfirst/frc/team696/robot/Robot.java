@@ -20,7 +20,10 @@ import org.usfirst.frc.team696.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem(RobotMap.sideswipe);
+	public static ExampleSubsystem ConveyerBelt = new ExampleSubsystem(RobotMap.conveyermotor);
+	
+	
 	public static OI oi;
 
 	Command autonomousCommand;
