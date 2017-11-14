@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team696.robot.commands.ExampleCommand;
+import org.usfirst.frc.team696.robot.subsystems.DriveTrainSubsystem;
 import org.usfirst.frc.team696.robot.subsystems.ExampleSubsystem;
 
 /**
@@ -22,13 +23,18 @@ public class Robot extends IterativeRobot {
 
 	public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem(RobotMap.sideswipe);
 	public static ExampleSubsystem ConveyerBelt = new ExampleSubsystem(RobotMap.conveyermotor);
+	public static DriveTrainSubsystem driveTrainSubsytem = new DriveTrainSubsystem(RobotMap.fleftmotor, RobotMap.mleftmotor, RobotMap.rleftmotor,
+																					RobotMap.frightmotor, RobotMap.mrightmotor, RobotMap.rrightmotor);
+	
 	
 	
 	public static OI oi;
+	
+	double speed;
+	double wheel;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -107,6 +113,22 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		
+		speed = -OI.stick.getRawAxis(1);
+		wheel = OI.stick.getRawAxis(4);
+		
+		double leftValue = speed + wheel;
+		double rightValue = speed - wheel;
+		
+		DriveTrainSubsystem.drive1.tankDrive(leftValue , rightValue);
+		DriveTrainSubsystem.drive2.tankDrive(leftValue , rightValue);
+		
+    	
+		
+		
+		
+		
 	}
 
 	/**

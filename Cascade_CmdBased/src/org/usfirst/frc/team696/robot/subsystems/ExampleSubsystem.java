@@ -9,9 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ExampleSubsystem extends Subsystem {
 	VictorSP sideswipemotor;
 	
-	public
-	// Put methods for controlling this subsystem
-	// here. Call these from Commands.
+	
 
 	public ExampleSubsystem(int sideswipeport) {
 		this.sideswipemotor = new VictorSP(sideswipeport);

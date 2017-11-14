@@ -8,13 +8,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrainSubsystem extends Subsystem {
 	
-	RobotDrive drive1 = new RobotDrive(9, 10, 2, 4);
-	RobotDrive drive2 = new RobotDrive(8, 3);
+	public static RobotDrive drive1;
+	public static RobotDrive drive2;
 	
-	public DriveTrainSubsystem() {
+	public DriveTrainSubsystem(int fleftmotor, int mleftmotor, int rleftmotor, 
+			int frightmotor, int mrightmotor, int rrightmotor ) {
 		
+	this.drive1 = new RobotDrive(fleftmotor, rleftmotor, 
+			frightmotor, rrightmotor);
+	this.drive2 = new RobotDrive(mleftmotor, mrightmotor);
 		
-		
+	
+	
 	}
 
    
