@@ -114,12 +114,17 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		
 		speed = -OI.stick.getRawAxis(1);
 		wheel = OI.stick.getRawAxis(4);
 		
 		double leftValue = speed + wheel;
 		double rightValue = speed - wheel;
+		
+		if(OI.stick.getRawButton(1)) {
+			ConveyerBe
+		}
+
+		
 		
 		DriveTrainSubsystem.drive1.tankDrive(leftValue , rightValue);
 		DriveTrainSubsystem.drive2.tankDrive(leftValue , rightValue);
