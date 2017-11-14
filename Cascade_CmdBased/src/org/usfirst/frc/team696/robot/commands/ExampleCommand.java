@@ -11,7 +11,6 @@ import org.usfirst.frc.team696.robot.subsystems.ConveyerBelt;
  */
 public class ExampleCommand extends Command {
 	
-	ConveyerBelt conveyer = new ConveyerBelt(RobotMap.conveyermotor);
 	
 	public  ExampleCommand() {
 		// Use requires() here to declare subsystem dependencies
@@ -30,7 +29,6 @@ public class ExampleCommand extends Command {
 	
 	protected void execute() {
 		
-		conveyer.conveyer.set(1);
 		
 		
 	}

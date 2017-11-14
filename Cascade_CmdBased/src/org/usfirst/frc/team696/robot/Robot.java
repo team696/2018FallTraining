@@ -1,16 +1,16 @@
 
 package org.usfirst.frc.team696.robot;
 
+import org.usfirst.frc.team696.robot.commands.ExampleCommand;
+import org.usfirst.frc.team696.robot.subsystems.ConveyerBelt;
+import org.usfirst.frc.team696.robot.subsystems.DriveTrainSubsystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team696.robot.commands.ExampleCommand;
-import org.usfirst.frc.team696.robot.subsystems.DriveTrainSubsystem;
-import org.usfirst.frc.team696.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,8 +21,8 @@ import org.usfirst.frc.team696.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem(RobotMap.sideswipe);
-	public static ExampleSubsystem ConveyerBelt = new ExampleSubsystem(RobotMap.conveyermotor);
+//	public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem(RobotMap.sideswipe);
+	public static ConveyerBelt ConveyerBelt = new ConveyerBelt(RobotMap.sideswipe);
 	public static DriveTrainSubsystem driveTrainSubsytem = new DriveTrainSubsystem(RobotMap.fleftmotor, RobotMap.mleftmotor, RobotMap.rleftmotor,
 																					RobotMap.frightmotor, RobotMap.mrightmotor, RobotMap.rrightmotor);
 	
@@ -100,7 +100,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
+		// teleoperated starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)
@@ -121,7 +121,14 @@ public class Robot extends IterativeRobot {
 		double rightValue = speed - wheel;
 		
 		if(OI.stick.getRawButton(1)) {
-			ConveyerBe
+			ConveyerBelt.ConveyerCommand();
+			
+		}
+		else {
+			ConveyerBelt.off();
+		
+		
+			
 		}
 
 		
