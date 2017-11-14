@@ -1,10 +1,8 @@
 package org.usfirst.frc.team696.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,31 +19,6 @@ public class Robot extends IterativeRobot {
 	final String customAuto = "My Auto";
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
-	
-	RobotDrive drive1 = new RobotDrive(9, 10, 2, 4);
-	RobotDrive drive2 = new RobotDrive(8, 3);
-	Joystick joy = new Joystick(0);
-//	VictorSP midRight = new VictorSP(8);
-//	VictorSP midLeft = new VictorSP(3);
-//	VictorSP frontLeft = new VictorSP(9);
-//	VictorSP rearLeft = new VictorSP(10);
-//	VictorSP frontRight = new VictorSP(2);
-//	VictorSP rearRight = new VictorSP(4);
-	
-	double commandedDrive;
-	double commandedTurn;
-	double motorPercentage;
-	double rampSpeed;
-	Timer time;
-	
-	PowerDistributionPanel pdp = new PowerDistributionPanel();
-	double midLeftCurrentDraw = pdp.getCurrent(2);
-	double midRightCurrentDraw = pdp.getCurrent(13);
-	double speed;
-	double wheel;
-	double currentDrawJoy;
-	double leftDrive;
-	double rightDrive;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -56,6 +29,9 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", defaultAuto);
 		chooser.addObject("My Auto", customAuto);
 		SmartDashboard.putData("Auto choices", chooser);
+		
+		PIDController pid = new PIDController(0, 0, 0, null, vic);
+		VictorSP vic = new VictorSP(3);
 	}
 
 	/**
@@ -98,81 +74,13 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		
-//		currentDrawJoy = joy.getRawAxis(1) * 3;
-//		
-		
-		
-		commandedDrive = joy.getRawAxis(1);
-		commandedTurn = joy.getRawAxis(4);
-		rampSpeed = 0.015;
-		
-		
-		/*
-		 * Forward and Backward Ramping
-		 */
-		
-		if(speed < commandedDrive) {
-			speed+=rampSpeed;                //forward ramping
-			
-		}
-		
-		if(speed > commandedDrive) {
-			speed-=rampSpeed;               //backward ramping
-		}
-		
-		
-		/*
-		 * Left and Right Ramping
-		 */
-		
-		if(wheel < commandedTurn) {
-			wheel += rampSpeed;
-		}
-		
-		if(wheel > commandedTurn) {
-			wheel -= rampSpeed;
-		}
-		
-		leftDrive = speed + wheel;
-		rightDrive = speed - wheel;
-		
-		drive1.tankDrive(leftDrive, rightDrive);
-		drive2.tankDrive(leftDrive, rightDrive);
-		
-		
-		System.out.println("Motor Percentage: " + motorPercentage + "        CommandedJoy: "  + commandedDrive);
-		
-//		if(joy.getRawAxis)
-//		for(midRightCurrentDraw = 0; midRightCurrentDraw < 3.325; leftDrive+=0.05) {
-//		
-//		}
-				
-		// pdp channel 13 is midright
-		// pdp channel 3 is midleft
-		
-//		System.out.println(joy.getRawAxis(1) * 3);
-//		System.out.println(pdp.getCurrent(3) * 10);
-		
-//		if(currentDrawJoy > 1) {
-//			for()
-//		}
-		
-//		drive1.tankDrive(leftDrive, rightDrive);
-//		drive2.tankDrive(leftDrive, rightDrive);
 	}
 
 	/**
 	 * This function is called periodically during test mode
 	 */
-	
-	
 	@Override
 	public void testPeriodic() {
-		
-		
-		
-		
 	}
 }
 

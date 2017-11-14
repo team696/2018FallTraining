@@ -43,6 +43,19 @@ public class RobotMap {
 	drive2[1] = 3;}
 	
 	
+	public static int []drive1 = new int[4];{
+		
+		drive1[0]= 9;
+		drive1[1]= 10;
+		drive1[2]= 2;
+		drive1[3]= 4;
+	}
+	public static int []drive2 = new int[2];{
+		
+		drive2[0] = 8;
+		drive2[1] = 3;
+		
+	}
 	
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
