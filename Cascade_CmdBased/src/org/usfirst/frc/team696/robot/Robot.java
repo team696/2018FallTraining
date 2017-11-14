@@ -12,8 +12,20 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+<<<<<<< HEAD
+=======
+import org.usfirst.frc.team696.robot.commands.ExampleCommand;
+<<<<<<< HEAD
+import org.usfirst.frc.team696.robot.subsystems.DriveTrain;
+=======
+import org.usfirst.frc.team696.robot.subsystems.DriveTrainSubsystem;
+>>>>>>> 9dfd111fc75c03a557d2a598622976daf755b140
+import org.usfirst.frc.team696.robot.subsystems.ExampleSubsystem;
+
+>>>>>>> 2bbff305a9f554f6895983198367a74e4e58bcf1
 /**
- * The VM is configured to automatically run this class, and to call the
+ * 
+ * nfigured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
@@ -21,13 +33,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
+<<<<<<< HEAD
 //	public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem(RobotMap.sideswipe);
 	public static ConveyerBelt ConveyerBelt = new ConveyerBelt(RobotMap.sideswipe);
+=======
+	public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem(RobotMap.sideswipe);
+<<<<<<< HEAD
+	public static DriveTrain conveyerBelt = new DriveTrain(RobotMap.conveyermotor);
+=======
+	public static ExampleSubsystem ConveyerBelt = new ExampleSubsystem(RobotMap.conveyermotor);
+>>>>>>> 2bbff305a9f554f6895983198367a74e4e58bcf1
 	public static DriveTrainSubsystem driveTrainSubsytem = new DriveTrainSubsystem(RobotMap.fleftmotor, RobotMap.mleftmotor, RobotMap.rleftmotor,
 																					RobotMap.frightmotor, RobotMap.mrightmotor, RobotMap.rrightmotor);
 	
 	
 	
+>>>>>>> 9dfd111fc75c03a557d2a598622976daf755b140
 	public static OI oi;
 	
 	double speed;
