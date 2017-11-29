@@ -1,10 +1,6 @@
 
 package org.usfirst.frc.team696.robot;
 
-import org.usfirst.frc.team696.robot.commands.ExampleCommand;
-import org.usfirst.frc.team696.robot.subsystems.ConveyerBelt;
-import org.usfirst.frc.team696.robot.subsystems.DriveTrainSubsystem;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -12,20 +8,12 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-<<<<<<< HEAD
-=======
 import org.usfirst.frc.team696.robot.commands.ExampleCommand;
-<<<<<<< HEAD
-import org.usfirst.frc.team696.robot.subsystems.DriveTrain;
-=======
 import org.usfirst.frc.team696.robot.subsystems.DriveTrainSubsystem;
->>>>>>> 9dfd111fc75c03a557d2a598622976daf755b140
 import org.usfirst.frc.team696.robot.subsystems.ExampleSubsystem;
 
->>>>>>> 2bbff305a9f554f6895983198367a74e4e58bcf1
 /**
- * 
- * nfigured to automatically run this class, and to call the
+ * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
@@ -33,29 +21,25 @@ import org.usfirst.frc.team696.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-<<<<<<< HEAD
-//	public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem(RobotMap.sideswipe);
-	public static ConveyerBelt ConveyerBelt = new ConveyerBelt(RobotMap.sideswipe);
-=======
-	public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem(RobotMap.sideswipe);
-<<<<<<< HEAD
-	public static DriveTrain conveyerBelt = new DriveTrain(RobotMap.conveyermotor);
-=======
-	public static ExampleSubsystem ConveyerBelt = new ExampleSubsystem(RobotMap.conveyermotor);
->>>>>>> 2bbff305a9f554f6895983198367a74e4e58bcf1
-	public static DriveTrainSubsystem driveTrainSubsytem = new DriveTrainSubsystem(RobotMap.fleftmotor, RobotMap.mleftmotor, RobotMap.rleftmotor,
-																					RobotMap.frightmotor, RobotMap.mrightmotor, RobotMap.rrightmotor);
+	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final DriveTrainSubsystem driveTrainSubsystem = new DriveTrainSubsystem(RobotMap.frontLeft, RobotMap.backLeft, 
+																						RobotMap.midLeft, RobotMap.frontRight, 
+																						RobotMap.midRight, RobotMap.backRight);
 	
-	
-	
->>>>>>> 9dfd111fc75c03a557d2a598622976daf755b140
 	public static OI oi;
-	
-	double speed;
-	double wheel;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	
+	
+	double commandedTurn;
+	double commandedDrive;
+	double speed;
+	double wheel;
+	double leftDrive;
+	double rightDrive;
+	final double rampSpeed = 0.015;
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -121,7 +105,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-		// teleoperated starts running. If you want the autonomous to
+		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
 		if (autonomousCommand != null)
@@ -135,31 +119,57 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		
-		speed = -OI.stick.getRawAxis(1);
-		wheel = OI.stick.getRawAxis(4);
+		commandedTurn = OI.joy.getRawAxis(4);
+		commandedDrive = -OI.joy.getRawAxis(1);
 		
-		double leftValue = speed + wheel;
-		double rightValue = speed - wheel;
+		/*
+		 * Forward and Backward Ramping
+		 */
 		
-		if(OI.stick.getRawButton(1)) {
-			ConveyerBelt.ConveyerCommand();
+		if(speed < 0.05 && commandedDrive > 0) {
+			speed = 0.05;					// instant jump up
+		}
+		
+		if(speed > -0.05 && commandedDrive < 0) {
+			speed = -0.05;					// instant jump down from 0
+		}
+		
+		if(speed < commandedDrive) {
+			speed+=rampSpeed;                //forward ramping
 			
 		}
-		else {
-			ConveyerBelt.off();
 		
-		
-			
+		if(speed > commandedDrive) {
+			speed-=rampSpeed;               //backward ramping
 		}
-
 		
 		
-		DriveTrainSubsystem.drive1.tankDrive(leftValue , rightValue);
-		DriveTrainSubsystem.drive2.tankDrive(leftValue , rightValue);
 		
-    	
+		/*
+		 * Left and Right Ramping
+		 */
+		
+		if(wheel < 0.05 && commandedTurn > 0) {
+			wheel = 0.05;
+		}
+		
+		if(wheel > -0.05 && commandedTurn < 0) {
+			wheel = -0.05;
+		}
+		
+		if(wheel < commandedTurn) {
+			wheel += rampSpeed;
+		}
+		
+		if(wheel > commandedTurn) {
+			wheel -= rampSpeed;
+		}
 		
 		
+		leftDrive = speed + wheel;
+		rightDrive = speed - wheel;
+		
+		driveTrainSubsystem.run(leftDrive, rightDrive);
 		
 		
 	}

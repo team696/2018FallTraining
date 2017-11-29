@@ -3,20 +3,14 @@ package org.usfirst.frc.team696.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team696.robot.Robot;
-import org.usfirst.frc.team696.robot.RobotMap;
-import org.usfirst.frc.team696.robot.subsystems.ConveyerBelt;
 
 /**
  *
  */
 public class ExampleCommand extends Command {
-	
-	
-	public  ExampleCommand() {
+	public ExampleCommand() {
 		// Use requires() here to declare subsystem dependencies
-		requires(Robot.ConveyerBelt);
-		
-		
+		requires(Robot.exampleSubsystem);
 	}
 
 	// Called just before this Command runs the first time
@@ -26,11 +20,7 @@ public class ExampleCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
-	
 	protected void execute() {
-		
-		
-		
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

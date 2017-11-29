@@ -30,4 +30,10 @@ public class ConveyerBelt extends Subsystem {
 		conveyer.set(1.0);
 		
 	}
+	
+	
+	public void  off() {
+		conveyer.set(0.0);
+	}
 }
+
